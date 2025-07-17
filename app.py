@@ -157,8 +157,6 @@ if submitted:
 
         # Predict salary
         prediction = model.predict(input_scaled)[0]
-        
-        """, unsafe_allow_html=True)
 
         # 📋 Input Summary
         st.markdown("### 📌 Summary of Inputs")
