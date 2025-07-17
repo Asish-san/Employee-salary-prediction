@@ -2,6 +2,8 @@ import streamlit as st
 import joblib
 import numpy as np
 import pandas as pd
+import requests
+import time
 
 # Load model
 @st.cache_resource
@@ -14,6 +16,24 @@ def load_rank():
         return float(f.read())
 
 # Load model components
+# Real-time currency conversion (USD to INR)
+def get_usd_to_inr_rate():
+    """
+    Fetches the latest USD to INR conversion rate from a public API and caches it for 1 hour.
+    """
+    if not hasattr(get_usd_to_inr_rate, "cache") or time.time() - get_usd_to_inr_rate.cache_time > 3600:
+        try:
+            response = requests.get("https://open.er-api.com/v6/latest/USD", timeout=5)
+            data = response.json()
+            rate = data["rates"]["INR"]
+            get_usd_to_inr_rate.cache = rate
+            get_usd_to_inr_rate.cache_time = time.time()
+        except Exception:
+            # Fallback to previous cached value or default
+            rate = getattr(get_usd_to_inr_rate, "cache", 83)
+    else:
+        rate = get_usd_to_inr_rate.cache
+    return rate
 try:
     model_data = load_model()
     model = model_data['model']
@@ -33,62 +53,117 @@ st.markdown("""
 <style>
 body {
     font-family: 'Montserrat', 'Segoe UI', sans-serif;
-    background: #f5f7fa;
+    background: linear-gradient(120deg, #f5f7fa 60%, #f59e42 100%);
+    min-height: 100vh;
 }
 .main-header {
-    background: radial-gradient(circle at 20% 40%, #f59e42 60%, #f43f5e 100%);
-    padding: 2.5rem 1rem;
-    border-radius: 18px;
+    background: linear-gradient(90deg, #f43f5e 0%, #f59e42 100%);
+    padding: 3rem 1.5rem 2rem 1.5rem;
+    border-radius: 24px;
     margin-bottom: 2.5rem;
     text-align: center;
     color: #fff;
-    box-shadow: 0 8px 24px rgba(244,63,94,0.08);
-    border: 2px solid #f59e42;
+    box-shadow: 0 12px 32px rgba(244,63,94,0.12);
+    border: 3px solid #fff;
+    animation: popIn 1s cubic-bezier(.68,-0.55,.27,1.55) 1;
+}
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 .metric-card {
-    background: linear-gradient(120deg, #f59e42 60%, #f43f5e 100%);
-    padding: 1.8rem 1rem;
-    border-radius: 14px;
+    background: linear-gradient(135deg, #f59e42 60%, #f43f5e 100%);
+    padding: 2rem 1.2rem;
+    border-radius: 18px;
     text-align: center;
-    box-shadow: 0 6px 18px rgba(245,158,66,0.07);
-    margin-bottom: 1.8rem;
+    box-shadow: 0 8px 24px rgba(245,158,66,0.12);
+    margin-bottom: 2rem;
     color: #fff;
-    border: 1.5px solid #f43f5e;
+    border: 2px solid #fff;
+    transition: transform 0.2s;
+}
+.metric-card:hover {
+    transform: scale(1.03) rotate(-2deg);
+    box-shadow: 0 16px 32px rgba(244,63,94,0.18);
 }
 .metric-card h2 {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     color: #fff;
-    margin: 0.7rem 0 0;
+    margin: 1rem 0 0;
     letter-spacing: 2px;
-    text-shadow: 0 2px 8px #f59e42;
+    text-shadow: 0 2px 12px #f59e42;
 }
 .prediction-card {
-    background: repeating-linear-gradient(135deg, #f43f5e 0px, #f59e42 40px, #f43f5e 80px);
+    background: linear-gradient(135deg, #f43f5e 0%, #f59e42 100%);
     color: #fff;
-    padding: 2.2rem 1.2rem;
-    border-radius: 20px;
+    padding: 2.5rem 1.5rem;
+    border-radius: 28px;
     text-align: center;
-    box-shadow: 0 10px 24px rgba(244,63,94,0.15);
-    margin: 2.2rem 0;
-    border: 2px dashed #fff;
+    box-shadow: 0 16px 32px rgba(244,63,94,0.18);
+    margin: 2.5rem 0;
+    border: 3px dashed #fff;
+    animation: fadeIn 1.2s cubic-bezier(.68,-0.55,.27,1.55) 1;
+}
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+.prediction-card h1 {
+    font-size: 3rem;
+    margin: 1rem 0 0.5rem 0;
+    color: #fff;
+    text-shadow: 0 2px 12px #f59e42;
+}
+.prediction-card h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+.prediction-card p {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    color: #fff;
 }
 .stButton > button {
-    background: linear-gradient(90deg, #f59e42 60%, #f43f5e 100%);
+    background: linear-gradient(90deg, #f43f5e 0%, #f59e42 100%);
     color: #fff;
     border: none;
-    padding: 1rem 2.2rem;
-    border-radius: 40px;
-    font-size: 1.15rem;
+    padding: 1.2rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
     font-weight: 700;
     width: 100%;
     transition: box-shadow 0.2s, transform 0.2s;
-    box-shadow: 0 2px 8px rgba(244,63,94,0.12);
-    letter-spacing: 1px;
+    box-shadow: 0 4px 16px rgba(244,63,94,0.18);
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    animation: popIn 1s cubic-bezier(.68,-0.55,.27,1.55) 1;
 }
 .stButton > button:hover {
-    transform: scale(1.04) translateY(-2px);
-    box-shadow: 0 8px 24px rgba(245,158,66,0.18);
-    background: linear-gradient(90deg, #f43f5e 60%, #f59e42 100%);
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 12px 32px rgba(245,158,66,0.22);
+    background: linear-gradient(90deg, #f59e42 0%, #f43f5e 100%);
+}
+.stTextInput > div > input {
+    background: #fffbe6;
+    border-radius: 12px;
+    border: 2px solid #f59e42;
+    padding: 0.7rem 1rem;
+    font-size: 1.1rem;
+    color: #f43f5e;
+    box-shadow: 0 2px 8px rgba(245,158,66,0.08);
+}
+.stSlider > div {
+    background: #fffbe6;
+    border-radius: 12px;
+    border: 2px solid #f59e42;
+    box-shadow: 0 2px 8px rgba(245,158,66,0.08);
+}
+.stSelectbox > div {
+    background: #fffbe6;
+    border-radius: 12px;
+    border: 2px solid #f59e42;
+    box-shadow: 0 2px 8px rgba(245,158,66,0.08);
 }
 </style>
 """, unsafe_allow_html=True)
@@ -156,9 +231,12 @@ if submitted:
         # Predict salary
         prediction = model.predict(input_scaled)[0]
 
-        # 🌟 Show Prediction
+        # 🌟 Show Prediction (USD and INR)
+        usd_to_inr = get_usd_to_inr_rate()
+        inr_prediction = prediction * usd_to_inr
+
         st.markdown(
-            f'<div class="prediction-card"><h2>💰 Predicted Annual Salary</h2><h1>${prediction:,.0f}</h1><p>Based on the employee details</p></div>',
+            f'<div class="prediction-card"><h2>💰 Predicted Annual Salary</h2><h1>USD ${prediction:,.0f}</h1><h1>INR ₹{inr_prediction:,.0f}</h1><p>Based on the employee details</p><p style="font-size:0.9rem;color:#f59e42;">(Live USD to INR rate: {usd_to_inr:.2f})</p></div>',
             unsafe_allow_html=True
         )
 
