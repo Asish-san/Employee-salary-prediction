@@ -10,11 +10,6 @@ import time
 def load_model():
     return joblib.load('model.pkl')
 
-@st.cache_data
-def load_rank():
-    with open("model_rank.txt", "r") as f:
-        return float(f.read())
-
 # Load model components
 # Real-time currency conversion (USD to INR)
 def get_usd_to_inr_rate():
@@ -40,7 +35,6 @@ try:
     label_encoders = model_data['label_encoders']
     scaler = model_data['scaler']
     feature_names = model_data['feature_names']
-    score = load_rank()
 except:
     st.error("❗ Please retrain the model first by running all cells in the notebook.")
     st.stop()
