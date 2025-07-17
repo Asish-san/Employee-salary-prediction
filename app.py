@@ -157,14 +157,7 @@ if submitted:
 
         # Predict salary
         prediction = model.predict(input_scaled)[0]
-
-        # ✨ Show Prediction
-        st.markdown(f"""
-        <div class="prediction-card">
-            <h2> Predicted Annual Salary</h2>
-            <h1>${prediction:,.0f}</h1>
-            <p>Based on the employee details</p>
-        </div>
+        
         """, unsafe_allow_html=True)
 
         # 📋 Input Summary
