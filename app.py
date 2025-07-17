@@ -158,6 +158,12 @@ if submitted:
         # Predict salary
         prediction = model.predict(input_scaled)[0]
 
+        # 🌟 Show Prediction
+        st.markdown(
+            f'<div class="prediction-card"><h2>💰 Predicted Annual Salary</h2><h1>${prediction:,.0f}</h1><p>Based on the employee details</p></div>',
+            unsafe_allow_html=True
+        )
+
         # 📋 Input Summary
         st.markdown("### 📌 Summary of Inputs")
         s1, s2 = st.columns(2)
@@ -175,8 +181,8 @@ if submitted:
 
 # 🔻 Footer
 st.markdown("---")
-st.markdown("""
 <div style="text-align: center; font-size: 0.9rem; color: #775;">
-     **Created by Asish Kumar**
+     Created by Asish Kumar | 🕸️ Streamlit
 </div>
-""", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center; font-size: 0.9rem; color: #775;'>Created by Asish Kumar | 🕸️ Streamlit</div>", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center; font-size: 0.9rem; color: #775;'>Created by Asish Kumar | 🕸️ Streamlit</div>", unsafe_allow_html=True)
