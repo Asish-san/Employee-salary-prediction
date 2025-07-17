@@ -180,3 +180,4 @@ st.markdown("""
      **Created by Asish Kumar**
 </div>
 """)
+""", unsafe_allow_html=True)
