@@ -180,7 +180,6 @@ if submitted:
 # 🔻 Footer
 st.markdown("---")
 <div style="text-align: center; font-size: 0.9rem; color: #775;">
-     Created by Asish Kumar | 🕸️ Streamlit
+     Created by Asish Kumar | Streamlit Web App
 </div>
-st.markdown("<div style='text-align: center; font-size: 0.9rem; color: #775;'>Created by Asish Kumar | 🕸️ Streamlit</div>", unsafe_allow_html=True)
-st.markdown("<div style='text-align: center; font-size: 0.9rem; color: #775;'>Created by Asish Kumar | 🕸️ Streamlit</div>", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center; font-size: 0.9rem; color: #775;'>Created by Asish Kumar | Streamlit Web App</div>", unsafe_allow_html=True)
