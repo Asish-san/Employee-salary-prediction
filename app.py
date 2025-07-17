@@ -119,8 +119,6 @@ with col1:
 
         submitted = st.form_submit_button("🔮 Predict Salary")
 
-    """, unsafe_allow_html=True)
-
     st.markdown("### 🔧 Features Used")
     for feature in feature_names:
         st.markdown(f"- {feature}")
