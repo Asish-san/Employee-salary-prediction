@@ -177,6 +177,6 @@ if submitted:
 st.markdown("---")
 st.markdown("""
 <div style="text-align: center; font-size: 0.9rem; color: #775;">
-     Created by Asish Kumar | 🌐 Streamlit
+     Created by Asish Kumar |🌐 Streamlit
 </div>
 """, unsafe_allow_html=True)
