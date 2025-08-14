@@ -197,10 +197,7 @@ with col1:
             'Marketing Coordinator'
         ]))
         experience = st.slider("📈 Years of Experience", 0.0, 50.0, 5.0, step=0.5)
-
         submitted = st.form_submit_button("🔮 Predict Salary")
-                     # 🎈 Balloon effect when salary is predicted
-                     st.balloons()
 
     st.markdown("### 🔧 Features Used")
     for feature in feature_names:
@@ -244,7 +241,7 @@ if submitted:
         inr_prediction = prediction * usd_to_inr
 
         st.markdown(
-            f'<div class="prediction-card"><h2>💰 Predicted Annual Salary</h2><h1>USD ${prediction:,.0f}</h1><h1>INR ₹{inr_prediction:,.0f}</h1><p>Based on the employee details</p><p style="font-size:0.9rem;color:#f59e42;">(Live USD to INR rate: {usd_to_inr:.2f})</p></div>',
+            f'<div class="prediction-card"><h2>💰 Predicted Annual Salary</h2><h1>USD ${prediction:,.0f}</h1><h1>INR ₹{inr_prediction:,.0f}</h1><p>Based on the employee details</p><p style="font-size:0.9rem;color:#cb202d, #dc1e28, #3366cc;">(Live USD to INR rate: {usd_to_inr:.2f})</p></div>',
             unsafe_allow_html=True
         )
 
