@@ -98,6 +98,9 @@ body {
     border: 3px dashed #fff;
     animation: fadeIn 1.2s cubic-bezier(.68,-0.55,.27,1.55) 1;
 }
+.github-link {
+    display: none !important;
+}
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
@@ -136,7 +139,9 @@ body {
 .stButton > button:hover {
     transform: scale(1.06) translateY(-2px);
     box-shadow: 0 12px 32px rgba(245,158,66,0.22);
-    background: linear-gradient(90deg, #f59e42 0%, #f43f5e 100%);
+    background: linear-gradient(90deg, #f59e42 0%, #f43f5e 100%);}
+.salary-animate {
+    animation: popSalary 1.2s cubic-bezier(.17,.67,.83,.67) forwards;
 }
 .stTextInput > div > input {
     background: #fffbe6;
@@ -187,6 +192,8 @@ with col1:
         experience = st.slider("📈 Years of Experience", 0.0, 50.0, 5.0, step=0.5)
 
         submitted = st.form_submit_button("🔮 Predict Salary")
+                    # 🎈 Balloon effect when salary is predicted
+                    st.balloons()
 
     st.markdown("### 🔧 Features Used")
     for feature in feature_names:
