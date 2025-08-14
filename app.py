@@ -60,6 +60,11 @@ body {
     box-shadow: 0 12px 32px rgba(244,63,94,0.12);
     border: 3px solid #fff;
     animation: popIn 1s cubic-bezier(.68,-0.55,.27,1.55) 1;
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    border-radius: 28px;
+    box-shadow: 0 8px 32px rgba(161,140,209,0.18);
+    padding: 32px;
+    animation: fadeIn 1.5s;
 }
 @keyframes popIn {
     0% { transform: scale(0.8); opacity: 0; }
@@ -106,7 +111,7 @@ body {
     animation: pulse 2s infinite;
 }
 .github-link {
-    display: none! important;
+    display: none !important;
 }
 @keyframes fadeIn {
     0% { opacity: 0; }
@@ -261,7 +266,8 @@ if submitted:
         st.info("Ensure the model was trained using these input features.")
 
 # 🔻 Footer
-st.markdown("---")
+st.markdown("<hr>", unsafe_allow_html=True)
+st.markdown("<div style='display:flex; justify-content:center; align-items:center;'>", unsafe_allow_html=True)
 st.markdown("""
 <div class='footer'>
     <span>Created by <b>Asish Rout</b>
