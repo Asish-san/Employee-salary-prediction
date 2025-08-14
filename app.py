@@ -192,8 +192,8 @@ with col1:
         experience = st.slider("📈 Years of Experience", 0.0, 50.0, 5.0, step=0.5)
 
         submitted = st.form_submit_button("🔮 Predict Salary")
-# 🎈 Balloon effect when salary is predicted
-st.balloons()
+    # 🎈 Balloon effect when salary is predicted
+    st.balloons()
 
     st.markdown("### 🔧 Features Used")
     for feature in feature_names:
