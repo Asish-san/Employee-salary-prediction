@@ -262,4 +262,12 @@ if submitted:
 
 # 🔻 Footer
 st.markdown("---")
-st.markdown("<div style='text-align: center; font-size: 0.9rem; color: #775;'>Created by Asish Kumar | Streamlit Web App</div>", unsafe_allow_html=True)
+st.markdown("""
+<div class='footer'>
+    <span>Created by <b>Asish Rout</b>
+    <br>
+    <span style='color:#43c6ac;'>Streamlit Web App</span> &nbsp; <span style='font-size:24px;'>🌐</span>
+    </span>
+</div>
+<div style='text-align:center; font-size:14px; color:#888; margin-top:10px;'> © 2025 Asish Rout, All rights reserved.</div>
+""", unsafe_allow_html=True)
