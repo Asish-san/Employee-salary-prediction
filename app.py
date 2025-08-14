@@ -190,10 +190,31 @@ with col1:
             'Marketing Coordinator'
         ]))
         experience = st.slider("📈 Years of Experience", 0.0, 50.0, 5.0, step=0.5)
-
-        submitted = st.form_submit_button("🔮 Predict Salary")
+# Predict button with animation
+if st.button('🚀 Predict Salary'):
+    # Modern UI card for salary prediction
+    st.markdown("""
+    <div style='background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); border-radius: 18px; box-shadow: 0 4px 24px rgba(67,233,123,0.18); padding: 24px; margin-bottom: 24px;'>
+        <h2 style='color:#fc00ff;'>Data Based Salary Prediction</h2>
+    </div>
+    """, unsafe_allow_html=True)
     # 🎈 Balloon effect when salary is predicted
     st.balloons()
+    # Play music when salary is predicted
+    import base64
+    music_file = 'assets/success.mp3'  # Place your music file in assets folder
+    try:
+        with open(music_file, 'rb') as f:
+            music_bytes = f.read()
+        music_base64 = base64.b64encode(music_bytes).decode()
+        st.markdown(f"""
+        <audio autoplay>
+            <source src="data:audio/mp3;base64,{music_base64}" type="audio/mp3">
+        </audio>
+        """, unsafe_allow_html=True)
+    except Exception:
+        st.info('Music file not found or could not be played.')
+
 
     st.markdown("### 🔧 Features Used")
     for feature in feature_names:
