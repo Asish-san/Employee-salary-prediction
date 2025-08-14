@@ -98,8 +98,15 @@ body {
     border: 3px dashed #fff;
     animation: fadeIn 1.2s cubic-bezier(.68,-0.55,.27,1.55) 1;
 }
+.footer {
+    text-align: centre;
+    font-size: 22px;
+    margin-top: 40px;
+    color: #a18cd1;
+    animation: pulse 2s infinite;
+}
 .github-link {
-    display: none !important;
+    display: none! important;
 }
 @keyframes fadeIn {
     0% { opacity: 0; }
@@ -192,8 +199,8 @@ with col1:
         experience = st.slider("📈 Years of Experience", 0.0, 50.0, 5.0, step=0.5)
 
         submitted = st.form_submit_button("🔮 Predict Salary")
-    # 🎈 Balloon effect when salary is predicted
-    st.balloons()
+                     # 🎈 Balloon effect when salary is predicted
+                     st.balloons()
 
     st.markdown("### 🔧 Features Used")
     for feature in feature_names:
